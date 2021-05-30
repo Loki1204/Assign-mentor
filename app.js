@@ -78,4 +78,66 @@ app.get("/mentors/:name", async (req, res) => {
   }
 });
 
+app.put("/students/:name", async (req, res) => {
+  try {
+    let client = await MongoClient.connect(uri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    let data = await client
+      .db("Mentor-StudentDB")
+      .collection("students")
+      .find({ Name: req.params.name })
+      .toArray();
+    if (!data[0].MentorAssigned) {
+      await client
+        .db("Mentor-StudentDB")
+        .collection("students")
+        .updateOne({ Name: req.params.name }, { $set: req.body });
+      res.status(200).json({ message: "Mentor updated" });
+    } else {
+      res.status(406).json({ message: "Mentor already assigned" });
+    }
+    client.close();
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+app.put("/mentors/:name", async (req, res) => {
+  try {
+    let client = await MongoClient.connect(uri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    let data = await client
+      .db("Mentor-StudentDB")
+      .collection("mentors")
+      .find({ Name: req.params.name })
+      .toArray();
+    if (data[0].StudentsAssigned.length === 4) {
+      res
+        .status(406)
+        .json({ message: "Maximum number of Students assigned to the Mentor" });
+    } else if (data[0].StudentsAssigned.length < 4) {
+      await client
+        .db("Mentor-StudentDB")
+        .collection("mentors")
+        .updateOne(
+          { Name: req.params.name },
+          {
+            $addToSet: {
+              StudentsAssigned: { $each: req.body.StudentsAssigned },
+            },
+          }
+        );
+      res.status(200).json({ message: "Student added to Mentor" });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
 app.listen(PORT, () => console.log(`App runs in port : ${PORT}`));
