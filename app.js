@@ -3,7 +3,7 @@ const MongoClient = require("mongodb").MongoClient;
 require("dotenv").config();
 
 const uri = process.env.URI;
-const port = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000;
 
 const app = express();
 
@@ -78,4 +78,4 @@ app.get("/mentors/:name", async (req, res) => {
   }
 });
 
-app.listen(port, () => console.log(`App runs in port : ${port}`));
+app.listen(PORT, () => console.log(`App runs in port : ${PORT}`));
