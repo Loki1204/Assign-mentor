@@ -1,0 +1,27 @@
+[
+    {
+        "id": 1,
+        "Name": "Ram",
+        "StudentsAssigned": ["Shalini", "Salma", "Latha", "Muthukumar"]
+    },
+    {
+        "id": 2,
+        "Name": "Jananathan",
+        "StudentsAssigned": ["Bava Chellathurai", "Rama krishnan", "Lakshmi Saravanakumar", "Araththu"]
+    },
+    {
+        "id": 3,
+        "Name": "Myskkin",
+        "StudentsAssigned": ["Sujatha", "Thamarai", "Imaiyam", "Siva kumar"]
+    },
+    {
+        "id": 4,
+        "Name": "Lenin Bharathi",
+        "StudentsAssigned": ["Ramasamy", "Annadurai", "Thiruvalluvar", "Kaunanithi"]
+    },
+    {
+        "id": 5,
+        "Name": "Karu Palaniappan",
+        "StudentsAssigned": ["Samas", "Bala Bharathi", "Paramasivan", "Yugabharathi"]
+    }
+]
