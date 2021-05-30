@@ -9,6 +9,7 @@ const app = express();
 
 app.use(express.json());
 
+// List of Mentors and Students assigned to them
 app.get("/mentors", async (req, res) => {
   try {
     let client = await MongoClient.connect(uri, {
@@ -32,6 +33,7 @@ app.get("/mentors", async (req, res) => {
   }
 });
 
+// List of Students and their Mentor
 app.get("/students", async (req, res) => {
   try {
     let client = await MongoClient.connect(uri, {
@@ -55,6 +57,7 @@ app.get("/students", async (req, res) => {
   }
 });
 
+// List of Students assigned to the particular Mentor
 app.get("/mentors/:name", async (req, res) => {
   try {
     let client = await MongoClient.connect(uri, {
@@ -78,6 +81,7 @@ app.get("/mentors/:name", async (req, res) => {
   }
 });
 
+// Updating the Mentor for a particular Student
 app.put("/students/:name", async (req, res) => {
   try {
     let client = await MongoClient.connect(uri, {
@@ -105,6 +109,7 @@ app.put("/students/:name", async (req, res) => {
   }
 });
 
+// Updating the Students for a paarticular Mentor
 app.put("/mentors/:name", async (req, res) => {
   try {
     let client = await MongoClient.connect(uri, {
