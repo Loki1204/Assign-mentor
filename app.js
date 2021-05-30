@@ -109,7 +109,7 @@ app.put("/students/:name", async (req, res) => {
   }
 });
 
-// Updating the Students for a paarticular Mentor
+// Updating the Students for a particular Mentor
 app.put("/mentors/:name", async (req, res) => {
   try {
     let client = await MongoClient.connect(uri, {
